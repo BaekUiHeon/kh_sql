@@ -90,6 +90,13 @@ select rownum, student_no,student_name
     where rownum=1
     );
     
+select department_name, round(avg(point),1) --19번
+    from tb_student 
+    join tb_grade using (student_no)
+    join tb_department using (department_no)
+    where category=(select category from tb_department where department_name='환경조경학과')
+    group by department_name;
+    
     
     
 
