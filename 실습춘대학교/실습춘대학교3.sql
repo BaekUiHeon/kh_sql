@@ -58,6 +58,42 @@ select student_name, professor_name --14번
     join tb_professor on (COACH_PROFESSOR_NO=PROFESSOR_NO)
     where department_name='서반아어학과';
     
+
+select student_no,student_name,department_name,round(avg(point),1) --15번
+from tb_student join tb_department using (department_no)
+join tb_grade using(student_no)
+where ABSENCE_YN='N'
+group by student_no,student_name,department_name
+having avg(point)>=4;
+
+select class_no, class_name, round(avg(point),8) --16번
+    from tb_class c join tb_grade using (class_no)
+    where department_no=34 and class_name not like('%논문%')
+    group by class_no,class_name
+    ;
+
+select student_name, student_address --17번
+    from tb_student
+    where department_no=(select department_no from tb_student where student_name='최경희')
+    ;
+    
+select student_no,student_name from( --18번
+select rownum, student_no,student_name 
+    from (
+    select student_no,student_name,avg(point)
+    from tb_student 
+    join tb_grade using (student_no)
+    where department_no='001'
+    group by student_no,student_name
+    order by avg(point) desc
+    )
+    where rownum=1
+    );
+    
+    
+    
+
+
     
 
 
