@@ -66,9 +66,10 @@ grade
 
 union
 
-select 년도,' ' 학기 , round(avg(평점),1) from grade
+select 년도,'4' 학기 , round(avg(평점),1) from grade
 group by 년도
 
 union
 
-select '3000' 년도,' '학기,round(avg(평점),1) from grade;
+select '3000' 년도,' '학기,round(avg(평점),1) from grade
+order by 년도,학기;
