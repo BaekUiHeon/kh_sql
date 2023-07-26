@@ -1,76 +1,76 @@
-select * from job; --1¹ø
+select * from job; --1ï¿½ï¿½
 
-select job_name from job; --2¹ø
+select job_name from job; --2ï¿½ï¿½
 
-select * from department; --3¹ø
+select * from department; --3ï¿½ï¿½
 
 select * from employee;
 
-select emp_name,email,phone,hire_date from employee; --4¹ø
+select emp_name,email,phone,hire_date from employee; --4ï¿½ï¿½
 
-select hire_date,emp_name,salary from employee; --5¹ø
+select hire_date,emp_name,salary from employee; --5ï¿½ï¿½
 
-select emp_name dlfma,salary*12 ¿¬ºÀ,salary*(12)*(1+nvl(bonus,0)) "ÃÑ¼ö·É¾×(º¸³Ê½ºÆ÷ÇÔ)" --6¹ø
-,salary*(12)*(1+nvl(bonus,0))*0.97 ½Ç¼ö·É¾× from employee;
+select emp_name dlfma,salary*12 ï¿½ï¿½ï¿½ï¿½,salary*(12)*(1+nvl(bonus,0)) "ï¿½Ñ¼ï¿½ï¿½É¾ï¿½(ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½)" --6ï¿½ï¿½
+,salary*(12)*(1+nvl(bonus,0))*0.97 ï¿½Ç¼ï¿½ï¿½É¾ï¿½ from employee;
 
-select emp_name,salary,hire_date,phone from employee --7¹ø
+select emp_name,salary,hire_date,phone from employee --7ï¿½ï¿½
     where sal_level='S1';
 
-select emp_name,salary,salary*(12)*(1+nvl(bonus,0))*0.97 ½Ç¼ö·É¾×,hire_date --8¹ø
+select emp_name,salary,salary*(12)*(1+nvl(bonus,0))*0.97 ï¿½Ç¼ï¿½ï¿½É¾ï¿½,hire_date --8ï¿½ï¿½
     from employee
     where salary*(12)*(1+nvl(bonus,0))*0.97 >50000000;
 
-select * from employee --9¹ø
+select * from employee --9ï¿½ï¿½
 where salary>4000000 and job_code='J2';
 
-select emp_name,dept_code,hire_date from employee --10¹ø
+select emp_name,dept_code,hire_date from employee --10ï¿½ï¿½
 where hire_date<'020101' and dept_code in('D5','D9');
 
-select * from employee --11¹ø
+select * from employee --11ï¿½ï¿½
 where hire_date between '900101' and '010101'; 
 
-select * from employee --12¹ø
-where emp_name like('%¿¬');
+select * from employee --12ï¿½ï¿½
+where emp_name like('%ï¿½ï¿½');
 
-select emp_name,phone from employee --13¹ø
+select emp_name,phone from employee --13ï¿½ï¿½
 where phone not like('010%');
 
-select * from employee --14¹ø
+select * from employee --14ï¿½ï¿½
 where email like('____#_%') escape '#' and dept_code in('D9','D6')
 and hire_date between '900101' and '001201' and salary>=2700000;
 
-select emp_name,substr(emp_no,1,2) ³âµµ, --15¹ø
-substr(emp_no,3,2) ¿ù,
-substr(emp_no,5,2) ÀÏ
+select emp_name,substr(emp_no,1,2) ï¿½âµµ, --15ï¿½ï¿½
+substr(emp_no,3,2) ï¿½ï¿½,
+substr(emp_no,5,2) ï¿½ï¿½
 from employee;
 
-select emp_name,rpad(substr(emp_no,1,7),14,'*') from employee; --16¹ø
+select emp_name,rpad(substr(emp_no,1,7),14,'*') from employee; --16ï¿½ï¿½
 
-select emp_name,round(abs(hire_date-sysdate),0) ±Ù¹«ÀÏ¼ö1, --17¹ø
-        round(abs(sysdate-hire_date),0) ±Ù¹«ÀÏ¼ö2 from employee;
+select emp_name,round(abs(hire_date-sysdate),0) ï¿½Ù¹ï¿½ï¿½Ï¼ï¿½1, --17ï¿½ï¿½
+        round(abs(sysdate-hire_date),0) ï¿½Ù¹ï¿½ï¿½Ï¼ï¿½2 from employee;
         
-select * from employee --18¹ø
+select * from employee --18ï¿½ï¿½
 where  mod(emp_id,2)=1;
 
-select * from employee --19¹ø
+select * from employee --19ï¿½ï¿½
 where (sysdate-hire_date)/365>20;
 
-select emp_name »ç¿ø¸í,to_char(salary,'L9,999,999') ±Þ¿© from employee; --20¹ø
+select emp_name ï¿½ï¿½ï¿½ï¿½ï¿½,to_char(salary,'L9,999,999') ï¿½Þ¿ï¿½ from employee; --20ï¿½ï¿½
 
-select emp_name, dept_code, substr(emp_no,1,2)||'³â' ||substr(emp_no,3,2)||'¿ù' || --21¹ø
-substr(emp_no,5,2)||'ÀÏ' »ý³â¿ùÀÏ from employee;
+select emp_name, dept_code, substr(emp_no,1,2)||'ï¿½ï¿½' ||substr(emp_no,3,2)||'ï¿½ï¿½' || --21ï¿½ï¿½
+substr(emp_no,5,2)||'ï¿½ï¿½' ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ from employee;
 
-select emp_id,emp_name,dept_code,decode(dept_code,'D5','ÃÑ¹«ºÎ','D6','±âÈ¹ºÎ','D9','¿µ¾÷ºÎ') --22¹ø
+select emp_id,emp_name,dept_code,decode(dept_code,'D5','ï¿½Ñ¹ï¿½ï¿½ï¿½','D6','ï¿½ï¿½È¹ï¿½ï¿½','D9','ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½') --22ï¿½ï¿½
     from employee
     where dept_code in('D5','D6','D9')
     order by dept_code;
     
-select emp_name,substr(emp_no,1,6),substr(emp_no,8,14),substr(emp_no,1,6)+substr(emp_no,8,14) --23¹ø
+select emp_name,substr(emp_no,1,6),substr(emp_no,8,14),substr(emp_no,1,6)+substr(emp_no,8,14) --23ï¿½ï¿½
 from employee
 where emp_id='201';
 
 
-select sum(salary*12*(1+nvl(bonus,0))) --24¹ø
+select sum(salary*12*(1+nvl(bonus,0))) --24ï¿½ï¿½
 from employee
 where dept_code='D5'
 group by dept_code;
@@ -87,7 +87,7 @@ select count(*), count(case when substr(hire_date,1,2)='01' then 1 end) as "2001
 
 
 
-
+select * from user_tables;
 
 
 

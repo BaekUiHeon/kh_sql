@@ -1,31 +1,30 @@
-select department_name ÇĞ°ú¸í,category °è¿­ from tb_department;  --1¹ø
+select department_name í•™ê³¼ëª…,category ê³„ì—´ from tb_department;  --1ë²ˆ
 
-select department_name||'ÀÇ Á¤¿øÀº',capacity||'¸í ÀÔ´Ï´Ù' from tb_department; --2¹ø
-
-select student_name from tb_student
-where department_no ='001' and  absence_yn='Y' and substr(student_ssn,8,1)='2';--3¹ø
+select department_name||'ì˜ ì •ì›ì€',capacity||'ëª… ì…ë‹ˆë‹¤' from tb_department; --2ë²ˆ
 
 select student_name from tb_student
-where student_no in('A513079','A513090','A513091','A513110','A513119');--4¹ø
+where department_no ='001' and  absence_yn='Y' and substr(student_ssn,8,1)='2';--3ë²ˆ
 
-select department_name, category from tb_department--5¹ø
+select student_name from tb_student
+where student_no in('A513079','A513090','A513091','A513110','A513119');--4ë²ˆ
+
+select department_name, category from tb_department--5ë²ˆ
 where capacity between 20 and 30;
 
-select professor_name from tb_professor --6¹ø
+select professor_name from tb_professor --6ë²ˆ
 where department_no is null;
 
 select student_no,student_name from tb_student
-where department_no not null; --7¹ø
+where department_no not null; --7ë²ˆ
 
 select class_no from tb_class
-where preattending_class_no is not null; --8¹ø
+where preattending_class_no is not null; --8ë²ˆ
 
-select distinct category from tb_department; --9¹ø
+select distinct category from tb_department; --9ë²ˆ
 
-select student_no, student_name,student_ssn from tb_student --10¹ø
-where substr(student_address,1,2)='ÀüÁÖ' and extract(year from entrance_date)='2002' and absence_yn='N'; 
+select student_no, student_name,student_ssn from tb_student --10ë²ˆ
+where substr(student_address,1,2)='ì „ì£¼' and extract(year from entrance_date)='2002' and absence_yn='N'; 
 ;
-
 
 
 

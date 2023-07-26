@@ -1,74 +1,74 @@
-create table tb_category( --1¹ø
+create table tb_category( --1ë²ˆ
                         name varchar2(10),
                         use_yn  char(1) default 'Y'
                         );
                         
-create table tb_class_type( --2¹ø
+create table tb_class_type( --2ë²ˆ
                         no varchar2(5) constraint tb_class_type primary key,
                         name varchar2(10) 
                         );
                         
-alter table tb_category add constraint pk_category primary key(name); --3¹ø
+alter table tb_category add constraint pk_category primary key(name); --3ë²ˆ
 
-alter table tb_class_type modify name not null; --4¹ø
+alter table tb_class_type modify name not null; --4ë²ˆ
 
-alter table tb_class_type modify no varchar2(10);  --5¹ø
+alter table tb_class_type modify no varchar2(10);  --5ë²ˆ
 alter table tb_category modify name varchar2(20);
 alter table tb_class_type modify name varchar2(20);
 
  
-alter table tb_class_type rename column name to class_type_name; --6¹ø
+alter table tb_class_type rename column name to class_type_name; --6ë²ˆ
 alter table tb_class_type rename column no to class_type_no;
 alter table tb_category rename column class_type_no to category_name;
 
-alter table tb_category rename constraint pk_category to pk_name; --7¹ø
+alter table tb_category rename constraint pk_category to pk_name; --7ë²ˆ
 alter table tb_class_type rename constraint tb_class_type to pk_no;
 
-insert into tb_category values('°øÇĞ','Y'); --8¹ø
-insert into tb_category values('ÀÚ¿¬°úÇĞ','Y');
-insert into tb_category values('ÀÇÇĞ','Y');
-insert into tb_category values('¿¹Ã¼´É','Y');
-insert into tb_category values('ÀÎ¹®»çÈ¸','Y');
+insert into tb_category values('ê³µí•™','Y'); --8ë²ˆ
+insert into tb_category values('ìì—°ê³¼í•™','Y');
+insert into tb_category values('ì˜í•™','Y');
+insert into tb_category values('ì˜ˆì²´ëŠ¥','Y');
+insert into tb_category values('ì¸ë¬¸ì‚¬íšŒ','Y');
 commit;
 
-alter table tb_department add constraint fk_department_category foreign key(category) references tb_category(category_name); --9¹ø
+alter table tb_department add constraint fk_department_category foreign key(category) references tb_category(category_name); --9ë²ˆ
 
-create view VW_ÇĞ»ıÀÏ¹İÁ¤º¸ as --10¹ø
-(select student_no ÇĞ¹ø,student_name ÇĞ»ıÀÌ¸§,student_address ÁÖ¼Ò from tb_student);
+create view VW_í•™ìƒì¼ë°˜ì •ë³´ as --10ë²ˆ
+(select student_no í•™ë²ˆ,student_name í•™ìƒì´ë¦„,student_address ì£¼ì†Œ from tb_student);
 
-create view VW_Áöµµ¸é´ã as --11¹ø
-    select student_no ÇĞ»ıÀÌ¸§, department_name ÇĞ°úÀÌ¸§, professor_name Áöµµ±³¼öÀÌ¸§ 
+create view VW_ì§€ë„ë©´ë‹´ as --11ë²ˆ
+    select student_no í•™ìƒì´ë¦„, department_name í•™ê³¼ì´ë¦„, professor_name ì§€ë„êµìˆ˜ì´ë¦„ 
     from tb_student join tb_department using(department_no)
     left join tb_professor on professor_no=COACH_PROFESSOR_NO
     order by department_name;
     
-    select * from VW_Áöµµ¸é´ã;
+    select * from VW_ì§€ë„ë©´ë‹´;
     
-    create view VW_ÇĞ°úº°ÇĞ»ı¼ö as  -- 12¹ø
+    create view VW_í•™ê³¼ë³„í•™ìƒìˆ˜ as  -- 12ë²ˆ
     select department_name,count(student_no) student_count from tb_student join tb_department using (department_no)
     group by department_name;
     
-    select * from VW_ÇĞ°úº°ÇĞ»ı¼ö;
+    select * from VW_í•™ê³¼ë³„í•™ìƒìˆ˜;
     
-    update VW_ÇĞ»ıÀÏ¹İÁ¤º¸ --13¹ø
-    set ÇĞ»ıÀÌ¸§='¹éÀÇÇå'
-    where ÇĞ¹ø='A213046';
+    update VW_í•™ìƒì¼ë°˜ì •ë³´ --13ë²ˆ
+    set í•™ìƒì´ë¦„='ë°±ì˜í—Œ'
+    where í•™ë²ˆ='A213046';
     
     
-    create view VW_ÀĞ±âÀü¿ë as --14¹ø
+    create view VW_ì½ê¸°ì „ìš© as --14ë²ˆ
     select * from tb_category
     with read only;
     
-    create or replace view VW_ÀÎ±â°ú¸ñ as  --15¹ø
-    select rownum ¼ø¹ø,°ú¸ñ¹øÈ£,°ú¸ñÀÌ¸§,´©Àû¼ö°­»ı¼ö as "´©Àû¼ö°­»ı¼ö(¸í)" from (
-    select class_no °ú¸ñ¹øÈ£, class_name °ú¸ñÀÌ¸§, count(*) as ´©Àû¼ö°­»ı¼ö
+    create or replace view VW_ì¸ê¸°ê³¼ëª© as  --15ë²ˆ
+    select rownum ìˆœë²ˆ,ê³¼ëª©ë²ˆí˜¸,ê³¼ëª©ì´ë¦„,ëˆ„ì ìˆ˜ê°•ìƒìˆ˜ as "ëˆ„ì ìˆ˜ê°•ìƒìˆ˜(ëª…)" from (
+    select class_no ê³¼ëª©ë²ˆí˜¸, class_name ê³¼ëª©ì´ë¦„, count(*) as ëˆ„ì ìˆ˜ê°•ìƒìˆ˜
         from tb_grade 
         join tb_class using (class_no)
         where substr(term_no,1,4) in ('2009','2008','2007')
         group by class_no,class_name
-        order by "´©Àû¼ö°­»ı¼ö" desc
+        order by "ëˆ„ì ìˆ˜ê°•ìƒìˆ˜" desc
         );
         
-    select * from VW_ÀÎ±â°ú¸ñ
-    where ¼ø¹ø<=3
+    select * from VW_ì¸ê¸°ê³¼ëª©
+    where ìˆœë²ˆ<=3
     order by rownum asc;

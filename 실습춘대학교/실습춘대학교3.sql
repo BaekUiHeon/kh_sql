@@ -1,83 +1,83 @@
-select student_name,student_address from tb_student --1¹ø
+select student_name,student_address from tb_student --1ë²ˆ
 order by student_name asc;
 
-select student_name,student_ssn from tb_student --2¹ø
+select student_name,student_ssn from tb_student --2ë²ˆ
 where absence_yn='Y'
 order by substr(student_ssn,1,2) desc;
 
-select student_name ÇĞ»ıÀÌ¸§,student_no ÇĞ¹ø,student_address °ÅÁÖÁöÁÖ¼Ò from tb_student --3¹ø
-where student_address like('%°­¿øµµ%') or student_address like('%°æ±âµµ%') and substr(student_no,1,1)='9';
+select student_name í•™ìƒì´ë¦„,student_no í•™ë²ˆ,student_address ê±°ì£¼ì§€ì£¼ì†Œ from tb_student --3ë²ˆ
+where student_address like('%ê°•ì›ë„%') or student_address like('%ê²½ê¸°ë„%') and substr(student_no,1,1)='9';
 
-select professor_name, professor_ssn from tb_professor --4¹ø
+select professor_name, professor_ssn from tb_professor --4ë²ˆ
 where department_no=005
 order by professor_ssn
 ;
 
-select student_no, point from tb_grade --5¹ø
+select student_no, point from tb_grade --5ë²ˆ
 where class_no='C3118100' and term_no='200402'
 order by point desc,student_no asc;
 
-select student_no, student_name, department_name from tb_student join tb_department using(department_no) --6¹ø
+select student_no, student_name, department_name from tb_student join tb_department using(department_no) --6ë²ˆ
 order by student_name;
 
-select class_name,department_name from tb_class join tb_department using (department_no); --7¹ø
+select class_name,department_name from tb_class join tb_department using (department_no); --7ë²ˆ
 
-select class_name,professor_name from tb_class_professor join tb_professor using (professor_no) join tb_class using(class_no); --8¹ø
+select class_name,professor_name from tb_class_professor join tb_professor using (professor_no) join tb_class using(class_no); --8ë²ˆ
 
-select class_name,professor_name from tb_class_professor join tb_professor p using (professor_no) join tb_class using(class_no) --9¹ø
-join tb_department d on(p.department_no=d.department_no and d.category='ÀÎ¹®»çÈ¸')
+select class_name,professor_name from tb_class_professor join tb_professor p using (professor_no) join tb_class using(class_no) --9ë²ˆ
+join tb_department d on(p.department_no=d.department_no and d.category='ì¸ë¬¸ì‚¬íšŒ')
 ;
 
-select student_no ÇĞ¹ø,student_name ÀÌ¸§,round(avg(point),1) ÀüÃ¼ÆòÁ¡ from tb_student join tb_grade using(student_no) --10¹ø
+select student_no í•™ë²ˆ,student_name ì´ë¦„,round(avg(point),1) ì „ì²´í‰ì  from tb_student join tb_grade using(student_no) --10ë²ˆ
 where department_no='059'
 group by student_no,student_name;
 
 
     
-select department_name ÇĞ°úÀÌ¸§, student_name ÇĞ»ıÀÌ¸§, professor_name Áöµµ±³¼öÀÌ¸§ --11¹ø
+select department_name í•™ê³¼ì´ë¦„, student_name í•™ìƒì´ë¦„, professor_name ì§€ë„êµìˆ˜ì´ë¦„ --11ë²ˆ
     from tb_student 
     join tb_department  using (department_no)
     join tb_professor  on (professor_no=coach_professor_no)
     where student_no='A313047';
     
-select student_name,term_no as "TERM_NAME" --12¹ø
+select student_name,term_no as "TERM_NAME" --12ë²ˆ
 from tb_student s join tb_grade g on 
 (g.student_no=s.student_no)
 where substr(term_no,1,4)='2007' and class_no='C2604100';
 
-select class_name, department_name --13¹ø
+select class_name, department_name --13ë²ˆ
     from tb_class c
     join tb_class_professor cp using (class_no)
-    join tb_department using (department_no) --13¹ø
-    where category='¿¹Ã¼´É' and professor_no is null;
+    join tb_department using (department_no) --13ë²ˆ
+    where category='ì˜ˆì²´ëŠ¥' and professor_no is null;
 ;
 
-select student_name, professor_name --14¹ø
+select student_name, professor_name --14ë²ˆ
     from tb_student 
     join tb_department using(department_no)
     join tb_professor on (COACH_PROFESSOR_NO=PROFESSOR_NO)
-    where department_name='¼­¹İ¾Æ¾îÇĞ°ú';
+    where department_name='ì„œë°˜ì•„ì–´í•™ê³¼';
     
 
-select student_no,student_name,department_name,round(avg(point),1) --15¹ø
+select student_no,student_name,department_name,round(avg(point),1) --15ë²ˆ
 from tb_student join tb_department using (department_no)
 join tb_grade using(student_no)
 where ABSENCE_YN='N'
 group by student_no,student_name,department_name
 having avg(point)>=4;
 
-select class_no, class_name, round(avg(point),8) --16¹ø
+select class_no, class_name, round(avg(point),8) --16ë²ˆ
     from tb_class c join tb_grade using (class_no)
-    where department_no=34 and class_name not like('%³í¹®%')
+    where department_no=34 and class_name not like('%ë…¼ë¬¸%')
     group by class_no,class_name
     ;
 
-select student_name, student_address --17¹ø
+select student_name, student_address --17ë²ˆ
     from tb_student
-    where department_no=(select department_no from tb_student where student_name='ÃÖ°æÈñ')
+    where department_no=(select department_no from tb_student where student_name='ìµœê²½í¬')
     ;
     
-select student_no,student_name from( --18¹ø
+select student_no,student_name from( --18ë²ˆ
 select rownum, student_no,student_name 
     from (
     select student_no,student_name,avg(point)
@@ -90,11 +90,11 @@ select rownum, student_no,student_name
     where rownum=1
     );
     
-select department_name, round(avg(point),1) --19¹ø
+select department_name, round(avg(point),1) --19ë²ˆ
     from tb_student 
     join tb_grade using (student_no)
     join tb_department using (department_no)
-    where category=(select category from tb_department where department_name='È¯°æÁ¶°æÇĞ°ú')
+    where category=(select category from tb_department where department_name='í™˜ê²½ì¡°ê²½í•™ê³¼')
     group by department_name;
     
     

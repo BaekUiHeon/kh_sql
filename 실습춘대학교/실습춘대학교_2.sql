@@ -1,75 +1,75 @@
-select student_no ÇĞ¹ø,student_name ÀÌ¸§,entrance_date ÀÔÇĞ³âµµ from tb_student
-order by entrance_date; --1¹ø
+select student_no í•™ë²ˆ,student_name ì´ë¦„,entrance_date ì…í•™ë…„ë„ from tb_student
+order by entrance_date; --1ë²ˆ
 
 select professor_name, professor_ssn from tb_professor
-where length(professor_name) ^= 3; --2¹ø
+where length(professor_name) ^= 3; --2ë²ˆ
 
-select professor_name ±³¼öÀÌ¸§, --3¹ø
+select professor_name êµìˆ˜ì´ë¦„, --3ë²ˆ
 case when substr(professor_ssn,1,2)<50 then floor((100*365+sysdate-to_date(substr(professor_ssn,1,6),'rrmmdd'))/365)
 else floor((sysdate - to_date(substr(professor_ssn,1,6),'rrmmdd'))/365)
-end as ³ªÀÌ from tb_professor;
--- 50³â ÀÌÇÏ¿¡ ´ëÇØ¼­ 'rrmmdd'´Â 2000³â´ë·Î ÀÎ½ÄÇÏ¹Ç·Î, 100(ÀÏ)*365·Î 100³âÀ» ´õÇØÁÜ
--- ±³¼öµéÀº ÀüºÎ 1900³â´ë»ıÀ¸·Î º¸¾ÒÀ¸¹Ç·Î °¡´ÉÇÑ ½ÄÀÓ. 
+end as ë‚˜ì´ from tb_professor;
+-- 50ë…„ ì´í•˜ì— ëŒ€í•´ì„œ 'rrmmdd'ëŠ” 2000ë…„ëŒ€ë¡œ ì¸ì‹í•˜ë¯€ë¡œ, 100(ì¼)*365ë¡œ 100ë…„ì„ ë”í•´ì¤Œ
+-- êµìˆ˜ë“¤ì€ ì „ë¶€ 1900ë…„ëŒ€ìƒìœ¼ë¡œ ë³´ì•˜ìœ¼ë¯€ë¡œ ê°€ëŠ¥í•œ ì‹ì„. 
 
-select substr(professor_name,2) ÀÌ¸§ from tb_professor; --4¹ø
+select substr(professor_name,2) ì´ë¦„ from tb_professor; --4ë²ˆ
 
 select entrance_date, student_ssn,extract(year from entrance_date)- extract(year from to_date(substr(student_ssn,1,2),'rr')) from tb_student;
 
-select student_no,student_name from tb_student --5¹ø
+select student_no,student_name from tb_student --5ë²ˆ
 where extract(year from entrance_date)- extract(year from to_date(substr(student_ssn,1,2),'rr'))<20;
 
-select to_char((to_date('20201225','yyyymmdd')),'DAY') from dual;  --6¹ø
+select to_char((to_date('20201225','yyyymmdd')),'DAY') from dual;  --6ë²ˆ
 
-select extract(year from to_date('99/10/11','yy/mm/dd')) yyÇ¥Çö,extract(year from to_date('49/10/11','yy/mm/dd')) yyÇ¥Çö, --7¹ø
-extract(year from to_date('99/10/11','rr/mm/dd')) rrÇ¥Çö,extract(year from to_date('49/10/11','rr/mm/dd')) rrÇ¥Çö from dual;
---yyÀº 2000³â´ë¸¦ ÀÇ¹Ì, rrÀº 50³âÀ» ±âÁØÀ¸·Î 50ºÎÅÍ´Â 1900³â´ë, 49³âµµÀÌÇÏ´Â 2000³â´ë ÀÇ¹Ì
+select extract(year from to_date('99/10/11','yy/mm/dd')) yyí‘œí˜„,extract(year from to_date('49/10/11','yy/mm/dd')) yyí‘œí˜„, --7ë²ˆ
+extract(year from to_date('99/10/11','rr/mm/dd')) rrí‘œí˜„,extract(year from to_date('49/10/11','rr/mm/dd')) rrí‘œí˜„ from dual;
+--yyì€ 2000ë…„ëŒ€ë¥¼ ì˜ë¯¸, rrì€ 50ë…„ì„ ê¸°ì¤€ìœ¼ë¡œ 50ë¶€í„°ëŠ” 1900ë…„ëŒ€, 49ë…„ë„ì´í•˜ëŠ” 2000ë…„ëŒ€ ì˜ë¯¸
 
-select student_no,student_name from tb_student --8¹ø
+select student_no,student_name from tb_student --8ë²ˆ
 where student_no not like('A%');
 
-select round(avg(point),1) ÆòÁ¡ from tb_grade --9¹ø
+select round(avg(point),1) í‰ì  from tb_grade --9ë²ˆ
 where student_no='A517178'
 group by student_no;
 
-select department_no,count(student_no) from tb_student --10¹ø
+select department_no,count(student_no) from tb_student --10ë²ˆ
 group by department_no
 order by department_no asc;
 
-select count(student_no) as "count(*)" from tb_student --11¹ø
+select count(student_no) as "count(*)" from tb_student --11ë²ˆ
 where COACH_PROFESSOR_NO is null;
 
 
 select * from tb_grade;
 
-with year_grade as (select substr(term_no,3,2) ³âµµ,student_no ÇĞ¹ø,point ÇĞÁ¡ from tb_grade where student_no='A112113') --12¹ø
-select ³âµµ,round(avg(ÇĞÁ¡),1) "³âµµº° ÆòÁ¡" from year_grade
-group by ³âµµ;
+with year_grade as (select substr(term_no,3,2) ë…„ë„,student_no í•™ë²ˆ,point í•™ì  from tb_grade where student_no='A112113') --12ë²ˆ
+select ë…„ë„,round(avg(í•™ì ),1) "ë…„ë„ë³„ í‰ì " from year_grade
+group by ë…„ë„;
 
-select department_no ÇĞ°úÄÚµå¸í,count(student_no) "ÈŞÇĞ»ı ¼ö" from tb_student --13¹ø
+select department_no í•™ê³¼ì½”ë“œëª…,count(student_no) "íœ´í•™ìƒ ìˆ˜" from tb_student --13ë²ˆ
 where ABSENCE_YN='Y'
 group by department_no
 order by department_no;
 
-select µ¿ÀÏÀÌ¸§,µ¿¸íÀÎ¼ö from( --14¹ø
-select student_name µ¿ÀÏÀÌ¸§,count(student_name) µ¿¸íÀÎ¼ö from tb_student
+select ë™ì¼ì´ë¦„,ë™ëª…ì¸ìˆ˜ from( --14ë²ˆ
+select student_name ë™ì¼ì´ë¦„,count(student_name) ë™ëª…ì¸ìˆ˜ from tb_student
 group by student_name)
-where µ¿¸íÀÎ¼ö>1;
+where ë™ëª…ì¸ìˆ˜>1;
 
 
-with grade as(select substr(term_no,1,4) ³âµµ, substr(term_no,6,1) ÇĞ±â, avg(point) ÆòÁ¡ --15¹ø
+with grade as(select substr(term_no,1,4) ë…„ë„, substr(term_no,6,1) í•™ê¸°, avg(point) í‰ì  --15ë²ˆ
 from tb_grade
 where student_no='A112113'
 group by term_no
 )
-select ³âµµ,ÇĞ±â,round(ÆòÁ¡,1) from
+select ë…„ë„,í•™ê¸°,round(í‰ì ,1) from
 grade
 
 union
 
-select ³âµµ,'4' ÇĞ±â , round(avg(ÆòÁ¡),1) from grade
-group by ³âµµ
+select ë…„ë„,'4' í•™ê¸° , round(avg(í‰ì ),1) from grade
+group by ë…„ë„
 
 union
 
-select '3000' ³âµµ,' 'ÇĞ±â,round(avg(ÆòÁ¡),1) from grade
-order by ³âµµ,ÇĞ±â;
+select '3000' ë…„ë„,' 'í•™ê¸°,round(avg(í‰ì ),1) from grade
+order by ë…„ë„,í•™ê¸°;

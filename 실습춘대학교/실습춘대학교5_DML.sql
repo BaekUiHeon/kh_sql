@@ -1,55 +1,55 @@
-insert into tb_class_type values('01','Àü°øÇÊ¼ö'); --1¹ø
-insert into tb_class_type values('02','Àü°ø¼±ÅÃ');
-insert into tb_class_type values('03','±³¾çÇÊ¼ö');
-insert into tb_class_type values('04','±³¾ç¼±ÅÃ');
-insert into tb_class_type values('05','³í¹®Áöµµ');
+insert into tb_class_type values('01','ì „ê³µí•„ìˆ˜'); --1ë²ˆ
+insert into tb_class_type values('02','ì „ê³µì„ íƒ');
+insert into tb_class_type values('03','êµì–‘í•„ìˆ˜');
+insert into tb_class_type values('04','êµì–‘ì„ íƒ');
+insert into tb_class_type values('05','ë…¼ë¬¸ì§€ë„');
 
 select * from tb_class_type;
 
-create table tb_ÇĞ»ıÀÏ¹İÁ¤º¸ as
-(select student_no ÇĞ¹ø,student_name ÇĞ»ıÀÌ¸§, student_address ÁÖ¼Ò from tb_student); --2¹ø
+create table tb_í•™ìƒì¼ë°˜ì •ë³´ as
+(select student_no í•™ë²ˆ,student_name í•™ìƒì´ë¦„, student_address ì£¼ì†Œ from tb_student); --2ë²ˆ
 
 
-create table tb_±¹¾î±¹¹®ÇĞ°ú as --3¹ø
-    (select student_no ÇĞ¹ø, student_name ÇĞ»ıÀÌ¸§, 
-    extract(year from to_date(substr(student_ssn,1,6),'rrmmdd')) Ãâ»ı³âµµ,
-        professor_name ±³¼öÀÌ¸§
+create table tb_êµ­ì–´êµ­ë¬¸í•™ê³¼ as --3ë²ˆ
+    (select student_no í•™ë²ˆ, student_name í•™ìƒì´ë¦„, 
+    extract(year from to_date(substr(student_ssn,1,6),'rrmmdd')) ì¶œìƒë…„ë„,
+        professor_name êµìˆ˜ì´ë¦„
         from tb_student s
         join tb_professor on(COACH_PROFESSOR_NO=professor_no)
         where s.department_no='001'
     );
     
-select * from tb_±¹¾î±¹¹®ÇĞ°ú;
+select * from tb_êµ­ì–´êµ­ë¬¸í•™ê³¼;
 
-update tb_department  --4¹ø
+update tb_department  --4ë²ˆ
 set capacity = round(capacity*1.1,0);
 
-update tb_student --5¹ø
-set student_address='¼­¿ï½Ã Á¾·Î±¸ ¼şÀÎµ¿ 181-21'
+update tb_student --5ë²ˆ
+set student_address='ì„œìš¸ì‹œ ì¢…ë¡œêµ¬ ìˆ­ì¸ë™ 181-21'
 where student_no='A413042';
 
-update tb_student --6¹ø
+update tb_student --6ë²ˆ
 set student_ssn = concat(substr(student_ssn,1,7),'*******');
-set student_ssn = concat(substr(student_ssn,1,7),lpad('*','7','*')); --2¹ø¤Š ¹æ¹ı 
+set student_ssn = concat(substr(student_ssn,1,7),lpad('*','7','*')); --2ë²ˆì¨° ë°©ë²• 
 
 select * from tb_student;
 
-update tb_grade --7¹ø
+update tb_grade --7ë²ˆ
 set point=3.5
 where 
 class_no=
     (select class_no from tb_class
-    where class_name='ÇÇºÎ»ı¸®ÇĞ')
+    where class_name='í”¼ë¶€ìƒë¦¬í•™')
     and
 student_no=
     (select student_no from tb_student
-    where student_name='±è¸íÈÆ' and department_no=(select department_no from tb_department where department_name='ÀÇÇĞ°ú')
+    where student_name='ê¹€ëª…í›ˆ' and department_no=(select department_no from tb_department where department_name='ì˜í•™ê³¼')
     );
     
-update tb_grade  --8¹ø
+update tb_grade  --8ë²ˆ
 set point=null
 where student_no in(select student_no from tb_student where ABSENCE_YN='Y');
 
-select * from tb_grade join tb_student using (student_no) --8¹ø
+select * from tb_grade join tb_student using (student_no) --8ë²ˆ
 where absence_yn='Y';
     
