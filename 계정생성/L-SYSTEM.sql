@@ -4,9 +4,8 @@
 --grant connect,resource, dba to scott;
 --connect scott/tiger;
 
-select * from user_tables;
 
 alter session set "_ORACLE_SCRIPT"=true;
-create user kh identified by kh;
-grant connect,resource, dba to kh;
-connect kh/kh;
+create user semi identified by semi;
+grant connect,resource, dba to semi;
+connect semi/semi;
